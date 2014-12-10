@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyText
+  filename: MyText
+  line_number: 1
+  status: MyString
+  test_run_id: 1
+
+two:
+  description: MyText
+  filename: MyText
+  line_number: 1
+  status: MyString
+  test_run_id: 1

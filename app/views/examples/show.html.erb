@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @example.description %>
+</p>
+
+<p>
+  <strong>Filename:</strong>
+  <%= @example.filename %>
+</p>
+
+<p>
+  <strong>Line number:</strong>
+  <%= @example.line_number %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @example.status %>
+</p>
+
+<p>
+  <strong>Test run:</strong>
+  <%= @example.test_run_id %>
+</p>
+
+<%= link_to 'Edit', edit_example_path(@example) %> |
+<%= link_to 'Back', examples_path %>

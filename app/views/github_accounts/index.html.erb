@@ -1,0 +1,31 @@
+<h1>Listing github_accounts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Client</th>
+      <th>Client secret</th>
+      <th>Url</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @github_accounts.each do |github_account| %>
+      <tr>
+        <td><%= github_account.name %></td>
+        <td><%= github_account.client_id %></td>
+        <td><%= github_account.client_secret %></td>
+        <td><%= github_account.url %></td>
+        <td><%= link_to 'Show', github_account %></td>
+        <td><%= link_to 'Edit', edit_github_account_path(github_account) %></td>
+        <td><%= link_to 'Destroy', github_account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Github account', new_github_account_path %>

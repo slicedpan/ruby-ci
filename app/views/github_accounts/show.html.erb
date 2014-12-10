@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @github_account.name %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @github_account.client_id %>
+</p>
+
+<p>
+  <strong>Client secret:</strong>
+  <%= @github_account.client_secret %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @github_account.url %>
+</p>
+
+<%= link_to 'Edit', edit_github_account_path(@github_account) %> |
+<%= link_to 'Back', github_accounts_path %>

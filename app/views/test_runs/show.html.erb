@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Branch:</strong>
+  <%= @test_run.branch_id %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @test_run.status %>
+</p>
+
+<%= link_to 'Edit', edit_test_run_path(@test_run) %> |
+<%= link_to 'Back', test_runs_path %>
