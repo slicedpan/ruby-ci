@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
-  resources :github_accounts
+  
+  resources :github_accounts do
+    resources :repos do
+      resources :branches do
+        resources :test_runs do
+          resources :examples
+        end
+      end
+    end
+  end  
 
-  resources :examples
-
-  resources :test_runs
-
-  resources :branches
+  get 'auth/github' => 'third_party_authentication#github'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

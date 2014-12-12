@@ -1,0 +1,11 @@
+<form action="<%= @url %>" id="the-form" method="post">
+  <input type="hidden" name="client_id" value="<%= @ga_account.client_id %>"></input>
+  <input type="hidden" name="client_secret" value="<%= @ga_account.client_secret %>"></input>
+  <input type="hidden" name="code" value="<%= @code %>"></input>
+</form>
+
+<script>
+  $.post('https://github.com/login/oauth/access_token', $('#the-form').serialize()).success(function(data) {
+    console.log(data);
+  });
+</script>

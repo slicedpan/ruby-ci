@@ -10,6 +10,8 @@ class GithubAccountsController < ApplicationController
   # GET /github_accounts/1
   # GET /github_accounts/1.json
   def show
+    @state = SecureRandom.urlsafe_base64(16)
+    session[@state] = @github_account.id
   end
 
   # GET /github_accounts/new

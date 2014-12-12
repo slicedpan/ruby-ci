@@ -11,14 +11,20 @@
 </p>
 
 <p>
-  <strong>Client secret:</strong>
-  <%= @github_account.client_secret %>
+  <strong>Username:</strong>
+  <%= @github_account.username %>
 </p>
 
-<p>
-  <strong>Url:</strong>
-  <%= @github_account.url %>
-</p>
+<% if !@github_account.authorized? %>
+
+<%
+  redirect = u(request.protocol + request.host_with_port + '/auth/github')
+url = "https://github.com/login/oauth/authorize?client_id=#{@github_account.client_id}&redirect_uri=#{redirect}&scope=repo&state=#{@state}" %>
+
+<% end %>
+
+<a href="<%= url %>">Authorize</a>
 
 <%= link_to 'Edit', edit_github_account_path(@github_account) %> |
 <%= link_to 'Back', github_accounts_path %>
+<%= link_to 'Repos', github_account_repos_path(:github_account_id => @github_account.id) %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  github_account_id: 1
+  github_name: MyString
+  last_synced: 2014-12-12 09:00:56
+
+two:
+  name: MyString
+  github_account_id: 1
+  github_name: MyString
+  last_synced: 2014-12-12 09:00:56
