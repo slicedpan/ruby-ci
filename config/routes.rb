@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
-  
+
   resources :github_accounts do
     resources :repos do
-      resources :branches do
-        resources :test_runs do
-          resources :examples
-        end
-      end
+      
+    end
+  end
+
+  root :to => 'branches#index'
+
+  resources :branches do
+    resources :test_runs do
+      resources :examples
     end
   end  
 

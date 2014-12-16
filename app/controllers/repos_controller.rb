@@ -11,7 +11,16 @@ class ReposController < ApplicationController
   # GET /repos/1
   # GET /repos/1.json
   def show
-    @branches = @repo.branches
+    @github_account = GithubAccount.find(params[:github_account_id])
+    @branches = @github_account.client.branches(@repo.github_name).map(&:to_h)
+    @existing = @repo.branches.select(:name, :id)
+    @branches.each do |branch|
+      match = @existing.find{ |b| b.name.to_s == branch[:name].to_s }
+      if !match.nil?
+        branch[:tracked] = true
+        branch[:ci_url] = branch_path(match)
+      end
+    end
   end
 
   # GET /repos/new

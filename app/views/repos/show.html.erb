@@ -20,5 +20,30 @@
   <%= @repo.last_synced %>
 </p>
 
+<table>
+  <tr>
+    <th>Name</th><th>Tracked</th><th>Actions</th>
+  </tr>
+  <% @branches.each do |branch| %>
+    <tr>
+      <td><%= branch[:name] %></td>
+      <td><%= branch[:tracked] || 'false' %></td>
+      <td>
+        <% if branch[:tracked] %>
+          <a href="<%= branch[:ci_url] %>">view</a>
+          <a href="<%= branch[:ci_url] %>" data-method="delete">stop tracking</a>
+        <% else %>
+          <form style="display:none" action="<%= branches_url %>" method="post">
+            <%= token_tag %>
+            <input type="hidden" name="branch[name]" value="<%= branch[:name] %>"></input>
+            <input type="hidden" name="branch[repo_id]" value="<%= @repo.id %>"></input>
+          </form>
+          <a href="<%= branches_url %>/<%= branch[:name] %>" class="create_branch_link">track</a>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
 <%= link_to 'Edit', edit_github_account_repo_path %> |
 <%= link_to 'Back', github_account_repos_path %>
