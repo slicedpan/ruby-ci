@@ -12,4 +12,11 @@
  *
  *= require_tree .
  *= require_self
+ *= require pure/pure
+ *= require pure/grids-responsive
+ *= require pure/grids
  */
+
+* {
+  box-sizing: border-box;
+}

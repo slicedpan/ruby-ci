@@ -1,10 +1,10 @@
 class BranchesController < ApplicationController
-  before_action :set_branch, only: [:show, :edit, :update, :destroy]
+  before_action :set_branch, only: [:show, :edit, :update, :destroy, :run_tests]
 
   # GET /branches
   # GET /branches.json
   def index
-    @branches = Branch.all
+    @branches = Branch.all.includes(:test_runs)
   end
 
   # GET /branches/1
@@ -19,6 +19,11 @@ class BranchesController < ApplicationController
 
   # GET /branches/1/edit
   def edit
+  end
+
+  def run_tests
+    @branch.run_tests
+    redirect_to :back
   end
 
   # POST /branches

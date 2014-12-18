@@ -6,9 +6,12 @@ Rails.application.routes.draw do
     end
   end
 
-  root :to => 'branches#index'
+  root :to => 'root#index'
 
   resources :branches do
+    member do
+      post :run_tests
+    end
     resources :test_runs do
       resources :examples
     end

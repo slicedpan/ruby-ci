@@ -2,8 +2,40 @@ module TestRunner
   TEST_DIR = Rails.root.join('tmp', 'test_runs')
 
   def run_tests
-    env_vars = 'BUNDLE_GEMFILE=./Gemfile RAILS_ENV=test'
-    `cd #{working_dir}; bash -c '#{env_vars} bundle install; #{env_vars} rspec'`
+    return if self.status != 'ready'
+    Thread.new do
+      begin
+        ActiveRecord::Base.connection_pool.with_connection do
+          update({:status => 'getting changes from Repo'})
+          update_dir
+          update({:status => 'running tests'})
+          env_vars = 'BUNDLE_GEMFILE=./Gemfile RAILS_ENV=test'
+          `cd #{working_dir}; bash -c '#{env_vars} bundle install; #{env_vars} rspec -fj -o tmp/rspec_output.json'`
+          dat = nil
+          File.open(working_dir.join('tmp', 'rspec_output.json')) do |f|
+            dat = JSON.load(f.read)
+          end
+          update({:status => 'saving test data'})
+          test_run = self.test_runs.create          
+          passing = true
+          dat["examples"].each do |example|
+            passing = false if example["status"] == 'failed'
+            test_run.examples.create(
+              :description => example["full_description"],
+              :status => example["status"],
+              :filename => example["file_path"],
+              :line_number => example["line_number"]
+            )
+          end
+          test_run.update({:status => passing ? 'passing' : 'failing'})
+          update({:status => 'ready'})
+        end
+      rescue StandardError => e
+        Rails.logger.error "TestRunner thread threw: #{e}"
+        Rails.logger.error e.backtrace.join("\n")
+      end
+    end
+    true
   end
 
   def working_dir

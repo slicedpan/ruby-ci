@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+source 'https://rails-assets.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
@@ -33,6 +33,9 @@ gem 'mysql2'
 gem 'httparty'
 
 gem 'git'
+
+gem 'rails-assets-angular'
+gem 'rails-assets-pure'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

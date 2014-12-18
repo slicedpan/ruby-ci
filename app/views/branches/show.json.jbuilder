@@ -1,1 +1,1 @@
-json.extract! @branch, :id, :name, :created_at, :updated_at
+json.partial! 'branches/branch', :branch => @branch
